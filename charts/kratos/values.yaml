@@ -196,6 +196,7 @@ kratos:
   #       plainBody:
 
   config:
+    dsn: postgres://kratos:kratos@kratos.postgres:5432/kratos?sslmode=disable&max_conns=20&max_idle_conns=4
     courier:
       smtp: {}
       #template_override_path: /conf/courier-templates
@@ -282,13 +283,13 @@ deployment:
   #  choice for the user. This also increases chances charts run on environments with little
   #  resources, such as Minikube. If you do want to specify resources, uncomment the following
   #  lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  resources: {}
-  #  limits:
-  #    cpu: 100m
-  #    memory: 128Mi
-  #  requests:
-  #    cpu: 100m
-  #  memory: 128Mi
+  resources:
+   limits:
+     cpu: 100m
+     memory: 128Mi
+   requests:
+     cpu: 100m
+     memory: 128Mi
 
   # -- Pod priority
   # https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
@@ -732,3 +733,11 @@ test:
   busybox:
     repository: busybox
     tag: 1
+
+mysql:
+  auth:
+    username: kratos
+    password: kratos
+    database: kratos
+    createDatabase: true
+
